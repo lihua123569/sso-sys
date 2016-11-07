@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dataTable Demo</title>
+<!-- 第一步引入文件 -->
+<link href="/inc/plugins/datatable/css/jquery.dataTables.css"	rel="stylesheet" />
+<script src="/inc/js/jquery-2.1.1.js"></script>
+<script src="/inc/plugins/datatable/js/jquery.dataTables.js"></script>
+</head>
+<body>
+
+<!-- 搜索框 -->
+<form id="form1" action="">
+	<input id="id" name="id" value="" />
+</form>  
+
+	<!--第二步：添加如下 HTML 代码-->
+<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>age</th>
+            </tr>
+        </tfoot>
+    </table>
+	<script type="text/javascript">
+	<!--第三步：初始化Datatables-->
+	$(document).ready(function() {
+	       $('#example').dataTable( {
+	    	   searching: false,
+	           processing: true,
+	           serverSide: true,
+	           bPaginate: true, //翻页功能
+	           bLengthChange: true, //改变每页显示数据数量
+	           bFilter: true, //过滤功能
+	           bSort: true, //排序功能
+	           bAutoWidth: true,//自动宽度
+	           sPaginationType: "simple_numbers",
+	           //iDisplayLength:"10",
+	           //iDisplayStart:"0",
+	             //console.log(param);
+	             //ajax请求数据
+	           /*如果加上下面这段内容，则使用post方式传递数据*/
+	           //sAjaxSource:'/dtable/getData',
+/* 	           fnServerData: function ( sSource, aoData, fnCallback ) {
+		           $.ajax( {
+			           dataType: 'json',
+			           type: "POST",
+			           url: '/dtable/getData',
+			           data: {beginDate:"2016-12-23"},//aoData,//$("#form1").serialize(),
+			           success: fnCallback
+		           } );
+	           }, */
+	           ajax:{
+		           url:"/dtable/getData",
+		           type:"POST",
+		           data:$("#form1").serialize()
+		          
+		       },
+		      
+	       
+	           lengthMenu: [ 3,20, 30, 40, 50, 100 ],
+	           columns: [
+	                     { data: 'id' },
+	                     { data: 'name' },
+	                     { data: 'age' }
+	                 ]
+	       } );
+	       
+	     /*   
+	       $('input.global_filter').on( 'keyup click', function () {
+		        filterGlobal();
+		    } );
+		 
+		    $('input.column_filter').on( 'keyup click', function () {
+		        filterColumn( $(this).parents('tr').attr('data-column') );
+		    } ); */
+		    
+	        $('#id').on( 'keyup click', function () {
+	           filterGlobal();
+	       } );  
+	       
+	      
+	   } );
+	
+	function fnCallback(){
+		alert(2);
+	}
+	
+	
+ 	function filterGlobal () {
+		 $('#example').DataTable().search($('#id').val()).draw();
+	}  
+	
+	function filterGlobal () {
+	    $('#example').DataTable().search(
+	        $('#global_filter').val(),
+	        $('#global_regex').prop('checked'),
+	        $('#global_smart').prop('checked')
+	    ).draw();
+	}
+	 
+	function filterColumn ( i ) {
+	    $('#example').DataTable().column( i ).search(
+	        $('#col'+i+'_filter').val(),
+	        $('#col'+i+'_regex').prop('checked'),
+	        $('#col'+i+'_smart').prop('checked')
+	    ).draw();
+	}
+	 
+	
+	alert(0);
+	
+	</script>
+</body>
+</html>

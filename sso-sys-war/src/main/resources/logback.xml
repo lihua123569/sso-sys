@@ -2,7 +2,7 @@
 
 <configuration>
 	<!-- 日志文件目录 -->
-	<property name="log.path" value="/home/lbyw/logs/shouyouzhushou" />
+	<property name="log.path" value="/home/lbyw/logs/sso" />
 
 	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -32,9 +32,9 @@
 			<onMatch>DENY</onMatch>
 			<onMismatch>ACCEPT</onMismatch>
 		</filter>
-		<file>${log.path}/shouyouzhushou-gateway.log</file>
+		<file>${log.path}/sso-sys.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${log.path}/shouyouzhushou-gateway.%d{yyyy-MM-dd}.%i.log
+			<fileNamePattern>${log.path}/sso-sys.%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 			<!-- <maxHistory>10</maxHistory> -->
 			<timeBasedFileNamingAndTriggeringPolicy
@@ -115,12 +115,12 @@
 		<appender-ref ref="mainAppender" />
 	</logger>
 
-	<logger name="com.liebao.lb7881.shouyouzhushou" level="INFO" additivity="false">
+	<logger name="com.sso.sys" level="INFO" additivity="false">
 		<appender-ref ref="mainAppender" />
 		<appender-ref ref="mainErrorAppender" />
 	</logger>
 
-	<logger name="com.liebao.lb7881.shouyouzhushou" level="INFO" />
+	<logger name="com.sso.sys" level="INFO" />
 	<logger name="ch.qos.logback" level="ERROR" />
 	<logger name="org.springframework" level="ERROR" />
 	<logger name="org.mybatis" level="ERROR" />

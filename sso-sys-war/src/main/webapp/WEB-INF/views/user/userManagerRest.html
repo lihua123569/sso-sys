@@ -1,0 +1,77 @@
+<html>
+<head>
+	<link href="/inc/plugins/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+	<script type="text/javascript" src="/inc/js/jquery-2.1.1.js" />
+	<script type="text/javascript" src="/inc/plugins/bootstrap/js/bootstrap.js" />
+</head>
+<body>
+<h2>Hello World!ddddddd</h2>
+
+<div class="container-fluid">
+	<table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    
+
+</div>
+
+<script type="text/javascript" src="/inc/js/jquery-2.1.1.js" />
+
+<script type="text/javascript">
+//1.$.ajax带json数据的异步请求
+function aj(){
+	alert("aj");
+	$.ajax( {  
+	    url:'/user/ajax/getUser',// 跳转到 action  
+	    data:{  
+	             userid : 1  
+	    },  
+	    type:'post',  
+	    cache:false,  
+	    dataType:'json',  
+	    success:function(data) { 
+	    	alert(data);/* 
+	        if(data.msg =="true" ){  
+	            // view("修改成功！");  
+	            alert("修改成功！");  
+	            window.location.reload();  
+	        }else{  
+	            view(data.msg);  
+	        }  
+	 */     },  
+	     error : function() {  
+	          // view("异常！");  
+	          alert("异常！");  
+	     }  
+	});
+}
+aj();
+</script>
+</body>
+</html>

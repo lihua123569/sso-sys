@@ -59,11 +59,21 @@
         </property>
     </bean>
     <!-- 对静态资源文件的访问,使用默认的Servlet来响应静态文件 -->
-    <mvc:resources mapping="/inc/**" location="/inc/"/>
+    <!-- <mvc:resources mapping="/inc/**" location="/inc/"/>
     <mvc:resources mapping="/scripts/**" location="/scripts/"/>
     <mvc:resources mapping="/msg/**" location="/msg/"/>
     <mvc:resources mapping="/pages/**" location="/pages/"/>
-    <mvc:resources mapping="/decorators/**" location="/decorators/"/>
+    <mvc:resources mapping="/decorators/**" location="/decorators/"/> -->
+    
+    <mvc:resources mapping="/inc/**" location="/inc/" />  
+    <mvc:resources mapping="/inc/*.js" location="/inc/" />  
+	<mvc:resources mapping="/**/*.html" location="/html/" />  
+	<mvc:resources location="/" mapping="/**/*.html"/>
+	<mvc:resources location="/" mapping="/**/*.js"/>
+	<mvc:resources location="/" mapping="/**/*.css"/>
+	<mvc:resources location="/" mapping="/**/*.png"/>
+	<mvc:resources location="/" mapping="/**/*.gif"/> 
+    
     <mvc:annotation-driven/>
 <!-- XXL-CONF配置解析器 -->
 </beans>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<link href="/inc/plugins/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<style type="text/css">
+	.div-form{
+		width:350px;height:300px;position:absolute;left:50%;top:50%;margin-top:-150px;
+		margin-left:-175px;
+	}
+	.a-regist{
+		float: right;
+	}
+</style>
+</head>
+<body>
+
+	<div class="container div-form">
+	<form action="/account/doRegist" id=""  role="form"  method="post" >
+		<div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="请输入用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="请输入密码" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="repassword" class="form-control" placeholder="请再次输入密码" required="">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox i-checks"><label>
+                    <input type="checkbox" required=""><i></i>我同意注册协议</label>
+                    </div>
+                </div>
+                <#if errorMsg?? >
+                <div class="form-group">
+					<br>
+					<div class="col-sm-10">
+						<div class="alert alert-danger">${errorMsg}</div>
+					</div>
+				</div>
+				</#if>
+				<div class="form-group">
+                <button type="submit" class="btn btn-primary">注 册</button>
+                <a class="btn btn-danger a-regist" href="/view/login">点此登录</a>
+                </div>
+	</form>
+	</div>
+
+<script type="text/javascript" src="/inc/js/jquery-2.1.1.js" />
+<script type="text/javascript" src="/inc/plugins/bootstrap/js/bootstrap.js" />
+
+<!-- nice-validform --> 
+<script type="text/javascript" src="/inc/plugins/nice-validator-0.10.11/src/jquery.validator.js" />
+</body>
+</html>

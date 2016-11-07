@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录</title>
+<link href="/inc/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<style type="text/css">
+.div-form {
+	width: 350px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-top: -150px;
+	margin-left: -175px;
+}
+</style>
+</head>
+<body>
+
+	<div class="div-form">
+		<h2>欢迎登录ssy-sso</h2>
+		<form role="form" method="post" action="/account/doLogin">
+			<div class="form-group">
+				<input type="text" name="name" class="form-control"
+					placeholder="用户名" required="">
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control"
+					placeholder="密码" required="">
+			</div>
+			<#if ctoken??>
+			<div class="form-group form-inline">
+				<input type="hidden" name="ctoken" id="ctoken" value="${ctoken}"> <input
+					type="text" name="captcha" class="form-control" id="captcha"
+					style="width: 170px;" placeholder="验证码" required="">
+				<!-- #set($captchaUrl ="/captcha/image.html?ctoken="+$!{ctoken}+"&t=") -->
+				<span id="imgcontainer" style="width: 50px; height: 50px;"  ></span>
+
+			</div>
+			</#if>
+			<div class="form-group form-inline">
+				<div class="checkbox i-checks">
+					<label><input type="checkbox" name="rememberMe"><i></i>&nbsp;记住我</label>
+				</div>
+				<a href="#"><small>忘记密码了？</small></a>
+			</div>
+			<#if errorMsg?? >
+			<div class="form-group">
+				<div class="col-sm-10">
+					<div class="alert alert-danger">
+						${errorMsg}
+					</div>
+				</div>
+			</div>
+			</#if>
+			<div class="form-group">
+				<button type="submit" class="btn btn-default form-control"
+					style="width: 100px;">登录</button>
+				<a class="btn btn-white " href="/view/regist" style="float: right;">注册一个新账号</a>
+			</div>
+		</form>
+	</div>
+
+	<script type="text/javascript" src="/inc/js/jquery-2.1.1.js"></script>
+	<script type="text/javascript"
+		src="/inc/plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- nice-validform -->
+	<script type="text/javascript"
+		src="/inc/plugins/nice-validator-0.10.11/src/jquery.validator.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			$("#imgcontainer").click(function() {
+				var url = "/account/ajax/getValideCode";
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('POST', url, true);
+	            xhr.responseType = "blob";
+	            xhr.onload = function() {
+	                if (this.status == 200) {
+	                    var blob = this.response;
+	                    var img = document.createElement("img");
+	                    img.onload = function(e) {
+	                        window.URL.revokeObjectURL(img.src); 
+	                    };
+	                    img.alt="测试验证";
+	                    img.style.width = '170px';
+	                    img.style.height = '30px';
+	                    
+	                    img.src = window.URL.createObjectURL(blob);
+	                    $("#imgcontainer").html(img);    
+	                }
+	            }
+	            xhr.send(ctoken:'${ctoken}');
+		      
+			});
+			
+			var url = "/account/ajax/getValideCode";
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.responseType = "blob";
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var blob = this.response;
+                    var img = document.createElement("img");
+                    img.onload = function(e) {
+                        window.URL.revokeObjectURL(img.src); 
+                    };
+                    img.alt="测试验证";
+                    img.style.width = '170px';
+                    img.style.height = '32px';
+                    
+                    img.src = window.URL.createObjectURL(blob);
+                    $("#imgcontainer").html(img);    
+                }
+            }
+            xhr.send(ctoken:'${ctoken}');
+		});
+		
+		
+		 
+	</script>
+</body>
+</html>
